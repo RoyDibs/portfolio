@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dibakar Roy Sarkar — Teaching Machines the Physics of the Real World</title>
+<meta name="description" content="Dibakar Roy Sarkar — PhD researcher at Johns Hopkins building neural operators and scientific machine learning for PDEs, control, and high-performance computing. From concrete to computation." />
+<meta name="author" content="Dibakar Roy Sarkar" />
+
+<meta property="og:title" content="Dibakar Roy Sarkar — Scientific Machine Learning" />
+<meta property="og:description" content="Neural operators, PDE control, and the mathematics of the physical world. Explore live simulations and real research." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/font/Serif/cmun-serif.css" />
+<link rel="stylesheet" href="css/style.css" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌊</text></svg>" />
+
+<!-- LaTeX rendering -->
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+  svg: { fontCache: 'global', scale: 0.98 },
+  options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body>
+
+<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" id="nav">
+  <a href="#top" class="nav__brand">
+    <span class="nav__mark">∂Ω</span>
+    <span class="nav__name">Dibakar Roy Sarkar</span>
+  </a>
+  <div class="nav__links">
+    <a href="#journey">Journey</a>
+    <a href="#research">Research</a>
+    <a href="#lab">Live Lab</a>
+    <a href="#motion">In Motion</a>
+    <a href="#papers">Papers</a>
+    <a href="#gallery">Life</a>
+    <a href="#contact" class="nav__cta">Contact</a>
+  </div>
+  <button class="nav__burger" id="navBurger" aria-label="Toggle menu"><span></span><span></span></button>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <canvas class="hero__canvas" id="heroCanvas" aria-hidden="true"></canvas>
+  <div class="hero__vignette" aria-hidden="true"></div>
+
+  <div class="hero__inner">
+    <p class="hero__eyebrow reveal">
+      <span class="pulse-dot"></span>
+      PhD Researcher · Scientific Machine Learning · Johns Hopkins University
+    </p>
+    <h1 class="hero__title reveal">
+      I teach machines the<br />
+      <span class="hero__accent">physics of the real world.</span>
+    </h1>
+    <p class="hero__sub reveal">
+      Neural operators, differentiable control of PDEs, and high-performance
+      scientific computing — from turbulence to fracture, from the brain to the supercomputer.
+    </p>
+    <div class="hero__actions reveal">
+      <a href="#lab" class="btn btn--primary">Enter the Live Lab →</a>
+      <a href="#journey" class="btn btn--ghost">Read my story</a>
+    </div>
+    <p class="hero__meta reveal">
+      Baltimore, MD · <a href="mailto:droysar1@jh.edu">droysar1@jh.edu</a>
+    </p>
+  </div>
+
+  <a href="#journey" class="hero__scroll" aria-label="Scroll down">
+    <span>scroll</span>
+    <span class="hero__scroll-line"></span>
+  </a>
+</header>
+
+<main>
+
+<!-- ============ JOURNEY ============ -->
+<section class="section journey" id="journey">
+  <div class="section__head reveal">
+    <span class="kicker">01 — The Throughline</span>
+    <h2 class="section__title">From concrete to computation.</h2>
+    <p class="section__lead">
+      I began by learning to build with concrete and steel in a small town in Assam.
+      Somewhere along the way I fell for the equations underneath the structures —
+      and then for teaching computers to solve them faster than we ever could by hand.
+      This is that trajectory.
+    </p>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline__line" aria-hidden="true"></div>
+
+    <article class="tl-item reveal">
+      <div class="tl-item__dot"></div>
+      <div class="tl-item__meta"><span class="tl-year">2016 — 2022</span><span class="tl-place">Kokrajhar, Assam · India</span></div>
+      <div class="tl-item__body">
+        <h3>The foundations, literally.</h3>
+        <p>Diploma and B.Tech in Civil Engineering at the Central Institute of Technology, Kokrajhar
+          (9.2 &amp; 8.98 CGPA). Concrete, surveying, structures — I learned how the physical world
+          is held up, and where it fails.</p>
+      </div>
+    </article>
+
+    <article class="tl-item reveal">
+      <div class="tl-item__dot"></div>
+      <div class="tl-item__meta"><span class="tl-year">2022 — 2024</span><span class="tl-place">IIT Madras · Chennai</span></div>
+      <div class="tl-item__body">
+        <h3>Falling for the mathematics.</h3>
+        <p>M.Tech at IIT Madras — top 5% of my class (CGPA 9.22), GATE top 3% nationwide.
+          Numerical methods, optimization, data science. I stopped seeing beams and started seeing
+          boundary-value problems. My first PINNs paper for inverse problems in heterogeneous media.</p>
+      </div>
+    </article>
+
+    <article class="tl-item reveal">
+      <div class="tl-item__dot"></div>
+      <div class="tl-item__meta"><span class="tl-year">2024 — now</span><span class="tl-place">Johns Hopkins University · Baltimore</span></div>
+      <div class="tl-item__body">
+        <h3>Teaching operators to learn physics.</h3>
+        <p>PhD in Civil &amp; Systems Engineering with Dr. Somdatta Goswami. Deep operator networks
+          that learn hidden physics to 95% accuracy, differentiable predictive control of PDEs,
+          neural surrogates for traumatic-brain-injury modeling and fracture.</p>
+      </div>
+    </article>
+
+    <article class="tl-item reveal">
+      <div class="tl-item__dot"></div>
+      <div class="tl-item__meta"><span class="tl-year">2025 — now</span><span class="tl-place">Argonne ALCF · UT Austin</span></div>
+      <div class="tl-item__body">
+        <h3>Scaling to the national labs.</h3>
+        <p>Multi-GPU neural-operator training on Argonne's Polaris (two Director's Discretionary
+          Awards, 5,600 node-hours; 83% faster). Chishiki AI Fellow at UT Austin. 1st place, global
+          Tesseract differentiable-simulation hackathon.</p>
+      </div>
+    </article>
+
+    <article class="tl-item reveal">
+      <div class="tl-item__dot"></div>
+      <div class="tl-item__meta"><span class="tl-year">2026 — now</span><span class="tl-place">Lawrence Livermore National Laboratory</span></div>
+      <div class="tl-item__body">
+        <h3>Interfaces, at the Livermore scale.</h3>
+        <p>Graduate research intern at the Data Science Institute — building agentic workflows for
+          materials-science applications and geometry-aware neural operators for moving-interface
+          problems.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ RESEARCH PILLARS ============ -->
+<section class="section research" id="research">
+  <div class="section__head reveal">
+    <span class="kicker">02 — What I Work On</span>
+    <h2 class="section__title">Four questions I keep chasing.</h2>
+  </div>
+
+  <div class="pillars">
+    <article class="pillar reveal">
+      <div class="pillar__num">\(\mathcal{G}_\theta\)</div>
+      <h3>Neural Operators</h3>
+      <p>Learning maps between infinite-dimensional function spaces —
+        \(\mathcal{G}_\theta : a(x)\!\mapsto\! u(x)\) — DeepONets and FNOs that replace expensive
+        solvers and generalize across geometries and parameters.</p>
+      <span class="pillar__tag">DeepONet · FNO · JAX</span>
+    </article>
+    <article class="pillar reveal">
+      <div class="pillar__num">\(\min_{f} J\)</div>
+      <h3>Differentiable PDE Control</h3>
+      <p>Steering physical systems in real time. Differentiable predictive control with
+        time-integrated operators, robust to noise, delay, and the sim-to-real gap.</p>
+      <span class="pillar__tag">DPC · MPC · Control</span>
+    </article>
+    <article class="pillar reveal">
+      <div class="pillar__num">\(\nabla_a\mathcal{L}\)</div>
+      <h3>Inverse Problems &amp; Hidden Physics</h3>
+      <p>Recovering material properties and governing parameters from sparse, noisy data by
+        minimizing \(\mathcal{L}=\lVert b - F(\hat a)\rVert^2\) with interface-aware networks.</p>
+      <span class="pillar__tag">PINNs · I-PINNs · Inversion</span>
+    </article>
+    <article class="pillar reveal">
+      <div class="pillar__num">\(\textstyle\sum_{\text{GPU}}\)</div>
+      <h3>HPC &amp; Scale</h3>
+      <p>Distributed multi-GPU training of high-dimensional operators on leadership-class
+        supercomputers — because physics doesn't fit on one card.</p>
+      <span class="pillar__tag">CUDA · MPI · Polaris</span>
+    </article>
+  </div>
+</section>
+
+<!-- ============ LIVE LAB ============ -->
+<section class="section lab" id="lab">
+  <div class="section__head reveal">
+    <span class="kicker">03 — The Live Lab</span>
+    <h2 class="section__title">Simulations, running in your browser.</h2>
+    <p class="section__lead">
+      Every panel below integrates a real governing equation, live, on your device — no videos,
+      no pre-baked frames. Drag the parameters and watch the physics respond. These interactive
+      demos mirror the systems I accelerate with neural operators in my research
+      (<a href="#motion">see the real results ↓</a>).
+    </p>
+  </div>
+
+  <!-- WAVE -->
+  <article class="viz reveal" id="viz-wave">
+    <div class="viz__stage">
+      <canvas class="viz__canvas" id="waveCanvas"></canvas>
+      <div class="viz__figtag">Fig. 01 — Hyperbolic PDE</div>
+      <div class="viz__live"><span></span>live</div>
+    </div>
+    <div class="viz__panel">
+      <h3>Wave Equation</h3>
+      <div class="viz__eq">\[ \frac{\partial^2 u}{\partial t^2} = c^2\nabla^2 u \;-\; \gamma\,\frac{\partial u}{\partial t} \]</div>
+      <p>A vibrating membrane integrated by explicit finite differences and rendered as a live 3D
+        wireframe. A driven source ripples outward; the damping term \(\gamma\) bleeds energy away.</p>
+      <div class="control"><label>Frequency \(f\) <output id="waveFreqOut">5.3</output></label>
+        <input type="range" id="waveFreq" min="0.5" max="12" step="0.1" value="5.3" /></div>
+      <div class="control"><label>Amplitude \(A\) <output id="waveAmpOut">0.6</output></label>
+        <input type="range" id="waveAmp" min="0.05" max="1.4" step="0.05" value="0.6" /></div>
+      <div class="control"><label>Damping \(\gamma\) <output id="waveDampOut">0.00</output></label>
+        <input type="range" id="waveDamp" min="0" max="0.06" step="0.002" value="0" /></div>
+      <button class="viz__reset" id="waveReset">↻ Reset field</button>
+    </div>
+  </article>
+
+  <!-- ALLEN-CAHN -->
+  <article class="viz reveal viz--reverse" id="viz-ac">
+    <div class="viz__stage">
+      <canvas class="viz__canvas" id="acCanvas"></canvas>
+      <div class="viz__figtag">Fig. 02 — Phase field</div>
+      <div class="viz__live"><span></span>live</div>
+    </div>
+    <div class="viz__panel">
+      <h3>Allen–Cahn Phase Separation</h3>
+      <div class="viz__eq">\[ \frac{\partial u}{\partial t} = \varepsilon^2\nabla^2 u + u - u^3 \]</div>
+      <p>Spinodal decomposition: a uniform mixture spontaneously separates into two phases and
+        coarsens, minimizing interface energy. The same physics behind alloys, foams, and the
+        moving interfaces I model at Livermore.</p>
+      <div class="control"><label>Interface width \(\varepsilon\) <output id="acEpsOut">1.4</output></label>
+        <input type="range" id="acEps" min="0.6" max="2.6" step="0.1" value="1.4" /></div>
+      <div class="control"><label>Reaction rate <output id="acRateOut">1.0</output></label>
+        <input type="range" id="acRate" min="0.3" max="2.2" step="0.1" value="1.0" /></div>
+      <button class="viz__reset" id="acReset">↻ Reseed mixture</button>
+    </div>
+  </article>
+
+  <!-- TURBULENCE -->
+  <article class="viz reveal" id="viz-turb">
+    <div class="viz__stage viz__stage--interactive">
+      <canvas class="viz__canvas" id="turbCanvas"></canvas>
+      <div class="viz__figtag">Fig. 03 — Incompressible flow</div>
+      <div class="viz__hint">move / drag your cursor across the field</div>
+    </div>
+    <div class="viz__panel">
+      <h3>Turbulence &amp; Smoke</h3>
+      <div class="viz__eq">\[ \frac{\partial \mathbf{u}}{\partial t} + (\mathbf{u}\!\cdot\!\nabla)\mathbf{u} = -\nabla p + \nu\nabla^2\mathbf{u},\quad \nabla\!\cdot\!\mathbf{u}=0 \]</div>
+      <p>A genuine incompressible fluid solver (Stam's stable-fluids method): semi-Lagrangian
+        advection, diffusion, and a pressure projection that keeps the flow divergence-free.
+        Push it and watch vortices shed and tangle.</p>
+      <div class="control"><label>Swirl (vorticity) <output id="turbVortOut">18</output></label>
+        <input type="range" id="turbVort" min="0" max="40" step="1" value="18" /></div>
+      <div class="control"><label>Dye fade <output id="turbFadeOut">0.996</output></label>
+        <input type="range" id="turbFade" min="0.985" max="0.999" step="0.001" value="0.996" /></div>
+      <button class="viz__reset" id="turbReset">↻ Clear &amp; auto-drive</button>
+    </div>
+  </article>
+
+  <!-- PDE CONTROL -->
+  <article class="viz reveal viz--reverse" id="viz-control">
+    <div class="viz__stage">
+      <canvas class="viz__canvas" id="ctrlCanvas"></canvas>
+      <div class="viz__figtag">Fig. 04 — Feedback control</div>
+      <div class="viz__live"><span></span>live</div>
+    </div>
+    <div class="viz__panel">
+      <h3>Learning to Control a PDE</h3>
+      <div class="viz__eq">\[ \frac{\partial u}{\partial t} = \alpha\,\frac{\partial^2 u}{\partial x^2} + f(x,t),\quad f = K\big(u^{*}(x,t)-u\big) \]</div>
+      <p>A heated rod that must track a moving target profile \(u^{*}\) (dashed). Distributed
+        actuators inject and remove heat; a feedback policy drives the error to zero. A toy of my
+        differentiable predictive control work — accepted at IEEE CDC 2026.</p>
+      <div class="control"><label>Control gain \(K\) <output id="ctrlGainOut">1.0</output></label>
+        <input type="range" id="ctrlGain" min="0" max="2.5" step="0.05" value="1.0" /></div>
+      <div class="control"><label>Target \(u^{*}\) <output id="ctrlTargOut">Sine</output></label>
+        <input type="range" id="ctrlTarg" min="0" max="2" step="1" value="0" /></div>
+      <button class="viz__reset" id="ctrlToggle">⏻ Toggle controller</button>
+    </div>
+  </article>
+</section>
+
+<!-- ============ RESEARCH IN MOTION ============ -->
+<section class="section motion" id="motion">
+  <div class="section__head reveal">
+    <span class="kicker">04 — Research in Motion</span>
+    <h2 class="section__title">The real thing.</h2>
+    <p class="section__lead">
+      The interactive demos above are teaching tools. These are actual outputs from my papers —
+      neural-operator controllers, learned surrogates, and high-fidelity solvers, straight from
+      the experiments.
+    </p>
+  </div>
+
+  <!-- controlled vs uncontrolled comparison -->
+  <figure class="compare reveal">
+    <div class="compare__pair">
+      <div class="compare__item">
+        <span class="compare__label compare__label--bad">Uncontrolled</span>
+        <img loading="lazy" src="assets/media/uncontrolled_grid.gif" alt="European power-grid frequency deviation spreading after a fault, uncontrolled" />
+      </div>
+      <div class="compare__vs">→</div>
+      <div class="compare__item">
+        <span class="compare__label compare__label--good">Controlled (DPC)</span>
+        <img loading="lazy" src="assets/media/controlled_grid.gif" alt="European power-grid frequency stabilized by differentiable predictive control" />
+      </div>
+    </div>
+    <figcaption>
+      <span class="rfig__cite">GreenHack 2026 · Power-Grid Frequency Control</span>
+      <h4>Stabilizing the European power grid after a fault</h4>
+      <div class="rfig__eq">\( M_i\,\dot{\omega}_i = P_i - D_i\,\omega_i - \sum_j B_{ij}\sin(\delta_i-\delta_j),\quad \dot{\delta}_i=\omega_i \)</div>
+      <p>A 900&nbsp;MW generation loss in Greece sends a frequency-deviation \(|\Delta f|\) wave
+        across the continent. Left: uncontrolled, the disturbance propagates. Right: differentiable
+        predictive control drives every node's frequency back to nominal in real time.</p>
+    </figcaption>
+  </figure>
+
+  <div class="motion__grid">
+    <figure class="rfig reveal">
+      <div class="rfig__media"><video autoplay loop muted playsinline preload="metadata"><source src="assets/media/ns2d.mp4" type="video/mp4" /></video></div>
+      <figcaption>
+        <span class="rfig__cite">ICML 2026 · CINOC &nbsp;·&nbsp; 🥇 Tesseract Hackathon (Multi-Agent DPC)</span>
+        <h4>2D Navier–Stokes density transport</h4>
+        <div class="rfig__eq">\( \partial_t \omega + (\mathbf{u}\!\cdot\!\nabla)\omega = \nu\nabla^2\omega \)</div>
+        <p>Cardinality-invariant neural-operator policies (CINOC) for <b>multi-agent</b> control of
+          incompressible flow — scalable to any number of actuators and sensors. The
+          differentiable-simulation pipeline that won 1st place at the global Tesseract hackathon.</p>
+      </figcaption>
+    </figure>
+
+    <figure class="rfig reveal">
+      <div class="rfig__media"><img loading="lazy" src="assets/media/fkpp_control.gif" alt="FKPP travelling-wave front under control" /></div>
+      <figcaption>
+        <span class="rfig__cite">IEEE CDC 2026 · Differentiable Predictive Control</span>
+        <h4>Controlling a 1D reaction–diffusion front</h4>
+        <div class="rfig__eq">\( \partial_t u = D\,\partial_{xx} u + r\,u(1-u) \)</div>
+        <p>Differentiable predictive control on a time-integrated neural operator drives the state
+          \(u(x,t)\) to a target profile \(u^{*}\) with distributed actuators — accepted at IEEE CDC 2026.</p>
+      </figcaption>
+    </figure>
+
+    <figure class="rfig reveal">
+      <div class="rfig__media"><img loading="lazy" src="assets/media/phasefield.gif" alt="Phase-field solidification microstructure evolving" /></div>
+      <figcaption>
+        <span class="rfig__cite">Moving interfaces · LLNL</span>
+        <h4>Phase-field solidification</h4>
+        <div class="rfig__eq">\( \partial_t \phi = -M\,\frac{\delta \mathcal{F}}{\delta \phi} \)</div>
+        <p>Dendritic microstructure growth — the class of geometry-aware moving-interface problems
+          I build neural operators for at Lawrence Livermore.</p>
+      </figcaption>
+    </figure>
+  </div>
+
+  <!-- wide benchmark figure -->
+  <figure class="rfig rfig--wide rfig--paper reveal">
+    <div class="rfig__media rfig__media--light"><img loading="lazy" src="assets/media/tidon_prediction.png" alt="TI-DON vs FDM prediction benchmark with relative L2 error histogram" /></div>
+    <figcaption>
+      <span class="rfig__cite">IEEE CDC 2026 · Time-Integrated DeepONet</span>
+      <h4>Operator surrogate vs. the ground-truth solver</h4>
+      <p>Across 3,000 unseen samples the time-integrated DeepONet matches the finite-difference
+        solver to a median relative \(L_2\) error of <b>1.11%</b> — while running orders of
+        magnitude faster, which is what makes real-time control tractable.</p>
+    </figcaption>
+  </figure>
+</section>
+
+<!-- ============ SELECTED WORK ============ -->
+<section class="section work" id="work">
+  <div class="section__head reveal">
+    <span class="kicker">05 — Selected Work</span>
+    <h2 class="section__title">Where the equations meet the world.</h2>
+  </div>
+
+  <div class="work__grid">
+    <article class="wcard wcard--media reveal">
+      <div class="wcard__media wcard__media--light"><img loading="lazy" src="assets/media/inverse_schematic.png" alt="Inverse problem forward-modeling loop schematic" /></div>
+      <span class="wcard__tag">Inverse · Hidden Physics</span>
+      <h3>Learning Hidden Physics &amp; Parameters</h3>
+      <p>Deep operator networks that recover governing parameters from data —
+        \(\hat a \leftarrow \hat a - \gamma\nabla\mathcal{L}\) — to 95% accuracy. Published in CMAME.</p>
+    </article>
+    <article class="wcard reveal">
+      <span class="wcard__tag">Control · ICML 2026</span>
+      <h3>CINOC — Cardinality-Invariant Operator Policies</h3>
+      <p>Scalable PDE control policies invariant to the number of actuators and sensors.
+        Accepted at ICML 2026.</p>
+    </article>
+    <article class="wcard reveal">
+      <span class="wcard__tag">Biomechanics · Award finalist</span>
+      <h3>Real-Time Traumatic Brain Injury Modeling</h3>
+      <p>Multimodal neural operators for real-time TBI biomechanics — toward personalized
+        protective-gear design. WSE Trainee Award finalist.</p>
+    </article>
+    <article class="wcard reveal">
+      <span class="wcard__tag">LLM · RAG · Deployed</span>
+      <h3>ARIA — AI Teaching Assistant</h3>
+      <p>A multimodal RAG assistant for Statics &amp; Mechanics, deployed to 90 students in
+        production on Streamlit.</p>
+    </article>
+    <article class="wcard reveal">
+      <span class="wcard__tag">HPC · Argonne Polaris</span>
+      <h3>Scalable Multi-GPU Operator Training</h3>
+      <p>Distributed CUDA + MPI training of high-dimensional PDE operators — 83% faster, 5,600
+        awarded node-hours on Polaris.</p>
+    </article>
+    <article class="wcard wcard--media reveal">
+      <div class="wcard__media wcard__media--light"><img loading="lazy" src="assets/media/fracture_plan.png" alt="Fracture control pipeline schematic" /></div>
+      <span class="wcard__tag">Neural Operators · FEM</span>
+      <h3>Hybrid Neural–FEM Fracture Simulation</h3>
+      <p>A neural-operator + finite-element hybrid that accelerates crack propagation while
+        preserving accuracy, with an RL agent steering the crack. Built with FEniCSx.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ============ PUBLICATIONS ============ -->
+<section class="section papers" id="papers">
+  <div class="section__head reveal">
+    <span class="kicker">06 — Publications</span>
+    <h2 class="section__title">The full list.</h2>
+    <p class="section__lead">Every paper, preprint, and work in review — across ML venues,
+      computational-mechanics journals, and controls conferences. Also on my
+      <a href="https://scholar.google.com/citations?user=Sz4nHdYAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>.</p>
+  </div>
+
+  <ul class="pub-list">
+    <li class="pub reveal"><span class="pub__venue">ICML 2026</span><div><p class="pub__title">CINOC: Cardinality-Invariant Neural Operator Policies for Scalable PDE Control</p><p class="pub__auth">Zanotta P., <b>Sarkar D.R.</b>, Zheng H., Goswami S., Drgoňa J.</p></div></li>
+    <li class="pub reveal"><span class="pub__venue">IEEE CDC 2026</span><div><p class="pub__title">Learning to Control PDEs with Differentiable Predictive Control and Time-Integrated Neural Operators</p><p class="pub__auth"><b>Sarkar D.R.</b>, Goswami S. · arXiv:2511.08992</p></div></li>
+    <li class="pub reveal"><span class="pub__venue">CMAME 2026</span><div><p class="pub__title">Learning Hidden Physics and System Parameters with Deep Operator Networks</p><p class="pub__auth"><b>Sarkar D.R.</b>, Kag V., Pal B., Goswami S. · 456:118926</p></div></li>
+    <li class="pub reveal"><span class="pub__venue">CMPB 2026</span><div><p class="pub__title">Multimodal Neural Operators for Real-Time Biomechanical Modelling of Traumatic Brain Injury</p><p class="pub__auth">Agarwal A., <b>Sarkar D.R.</b>, Goswami S. · 109398</p></div></li>
+    <li class="pub reveal"><span class="pub__venue">arXiv 2025</span><div><p class="pub__title">Learning Generalizable Neural Operators for Inverse Problems</p><p class="pub__auth">Thorpe A.J., Tretiakov S., <b>Sarkar D.R.</b>, Kumar K., Topcu U. · arXiv:2512.18120</p></div></li>
+    <li class="pub reveal"><span class="pub__venue">FEAD 2025</span><div><p class="pub__title">Adaptive Interface-PINNs for Inverse Problems: Determining Material Properties for Heterogeneous Systems</p><p class="pub__auth"><b>Sarkar D.R.</b>, Annavarapu C., Roy P. · 249:104373</p></div></li>
+    <li class="pub reveal"><span class="pub__venue">ESREL 2025</span><div><p class="pub__title">Uncertainty-Aware Optimization in Engineered Systems via Gradient Boosting and Differential Evolution</p><p class="pub__auth"><b>Sarkar D.R.</b>, Basu S., Manuel L., Goswami S.</p></div></li>
+    <li class="pub reveal"><span class="pub__venue">EDU · RAG</span><div><p class="pub__title">ARIA: Adaptive Retrieval Intelligence Assistant — A Multimodal RAG Framework for Engineering Education</p><p class="pub__auth">Luo Y., <b>Sarkar D.R.</b>, Sangree R.H., Goswami S. · arXiv:2604.06179</p></div></li>
+    <li class="pub reveal"><span class="pub__venue">FEAD 2025</span><div><p class="pub__title">Adaptive Interface-PINNs (AdaI-PINNs) for transient diffusion: forward and inverse problems in heterogeneous media</p><p class="pub__auth">Roy S., <b>Sarkar D.R.</b>, Annavarapu C., Roy P., Lecampion B., Valiveti D.M. · 244:104305</p></div></li>
+    <li class="pub reveal"><span class="pub__venue">Under review</span><div><p class="pub__title">Interface Physics-Informed Neural Networks (I-PINNs) to Solve Inverse Problems in Heterogeneous Materials</p><p class="pub__auth"><b>Sarkar D.R.</b>, Annavarapu C., Roy P. · Machine Learning for Computational Science and Engineering</p></div></li>
+  </ul>
+</section>
+
+<!-- ============ AWARDS ============ -->
+<section class="section awards" id="awards">
+  <div class="section__head reveal">
+    <span class="kicker">07 — Recognition</span>
+    <h2 class="section__title">Some things that went right.</h2>
+  </div>
+  <div class="award-grid">
+    <div class="award reveal">
+      <span class="award__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.7 4.6L18 9l-4.3 1.4L12 15l-1.7-4.6L6 9l4.3-1.4L12 3Z"/><path d="M18.5 14.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8.8-2Z"/></svg></span>
+      <b>Chishiki AI Graduate Fellowship</b><span>SCIPE · UT Austin · 2026–27</span>
+    </div>
+    <div class="award reveal">
+      <span class="award__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h12v3.5a6 6 0 0 1-12 0V4Z"/><path d="M6 6H3.6v.6A3.4 3.4 0 0 0 6 9.9M18 6h2.4v.6A3.4 3.4 0 0 1 18 9.9"/><path d="M12 13.5v3M8.5 20.5h7M9.6 16.5h4.8l.8 4H8.8l.8-4Z"/></svg></span>
+      <b>1st — Tesseract Hackathon</b><span>Global · differentiable simulation</span>
+    </div>
+    <div class="award reveal">
+      <span class="award__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2.5 5 13.5h6l-1 8 8-11h-6l1-8Z"/></svg></span>
+      <b>2× Director's Discretionary Award</b><span>Argonne ALCF · 5,600 node-hours</span>
+    </div>
+    <div class="award reveal">
+      <span class="award__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="14" r="5.2"/><path d="M9 2.4 7.4 6.4M15 2.4l1.6 4"/><path d="m12 11.4 1 2 2.2.3-1.6 1.5.4 2.2-2-1-2 1 .4-2.2-1.6-1.5 2.2-.3 1-2Z"/></svg></span>
+      <b>3rd — NASA &amp; DNV Challenge</b><span>Optimization under uncertainty</span>
+    </div>
+    <div class="award reveal">
+      <span class="award__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M8.5 12.2 7 21l5-2.4L17 21l-1.5-8.8"/></svg></span>
+      <b>WSE Trainee Award Finalist</b><span>TBI modeling · JHU 2025</span>
+    </div>
+    <div class="award reveal">
+      <span class="award__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9.2 12 5l10 4.2-10 4.2L2 9.2Z"/><path d="M6 11.2V15c0 1.5 2.7 3 6 3s6-1.5 6-3v-3.8"/><path d="M22 9.5v5"/></svg></span>
+      <b>Creel Family Fellowship</b><span>Johns Hopkins · 2024–25</span>
+    </div>
+    <div class="award reveal">
+      <span class="award__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20.5h18"/><rect x="4.5" y="11" width="3.4" height="7"/><rect x="10.3" y="6" width="3.4" height="12"/><rect x="16.1" y="8.5" width="3.4" height="9.5"/></svg></span>
+      <b>GATE 2022 · Top 3%</b><span>96.96 percentile nationwide</span>
+    </div>
+    <div class="award reveal">
+      <span class="award__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.2"/><path d="m12 7.6 1.2 2.5 2.7.4-2 1.9.5 2.7-2.4-1.3-2.4 1.3.5-2.7-2-1.9 2.7-.4 1.2-2.5Z"/></svg></span>
+      <b>TATA Motors Excellence Scholarship</b><span>Academic performance</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY / LIFE ============ -->
+<section class="section gallery" id="gallery">
+  <div class="section__head reveal">
+    <span class="kicker">08 — Life Beyond the Solver</span>
+    <h2 class="section__title">Conferences, labs, and the road.</h2>
+    <p class="section__lead">
+      Research is a team sport played across continents. A few frames from the journey —
+      from an M.Tech convocation in Chennai to ICML and the Sierra granite behind Livermore.
+    </p>
+  </div>
+  <div class="gallery__grid" id="galleryGrid"></div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section contact" id="contact">
+  <canvas class="contact__canvas" id="contactCanvas" aria-hidden="true"></canvas>
+  <div class="contact__inner reveal">
+    <span class="kicker">09 — Let's build something</span>
+    <h2 class="contact__title">Working on operators, control, or SciML at scale?<br />I'd love to talk.</h2>
+    <div class="contact__actions">
+      <a href="mailto:droysar1@jh.edu" class="btn btn--primary">droysar1@jh.edu</a>
+      <a href="assets/pdf/DIBAKAR_CV_JUL2026.pdf" class="btn btn--ghost" target="_blank" rel="noopener">CV (PDF)</a>
+    </div>
+    <div class="contact__links">
+      <a href="https://github.com/RoyDibs" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/dibakar-roy-sarkar/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://scholar.google.com/citations?user=Sz4nHdYAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+    </div>
+  </div>
+  <footer class="footer">
+    <span>© <span id="year"></span> Dibakar Roy Sarkar</span>
+    <span>Baltimore, MD · Built with equations &amp; a little JavaScript</span>
+  </footer>
+</section>
+
+</main>
+
+<script src="js/viz/hero.js"></script>
+<script src="js/viz/wave.js"></script>
+<script src="js/viz/allencahn.js"></script>
+<script src="js/viz/turbulence.js"></script>
+<script src="js/viz/control.js"></script>
+<script src="js/gallery.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
