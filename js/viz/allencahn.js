@@ -61,9 +61,13 @@
       ctx.putImageData(img, 0, 0);
     }
 
+    let frame = 0;
     function loop() {
-      if (running) { for (let s = 0; s < 3; s++) stepOnce(); render(); }
       raf = requestAnimationFrame(loop);
+      if (!running) return;
+      if (frame++ % 2) return;            // ~30fps
+      for (let s = 0; s < 3; s++) stepOnce();
+      render();
     }
 
     resize();

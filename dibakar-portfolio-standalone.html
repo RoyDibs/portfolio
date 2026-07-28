@@ -107,8 +107,8 @@ canvas { display: block; }
   border-bottom: 1px solid transparent;
 }
 .nav.is-scrolled {
-  background: var(--glass);
-  backdrop-filter: blur(14px) saturate(160%);
+  background: rgba(247,248,251,.9);
+  backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--line);
   padding-top: 12px; padding-bottom: 12px;
   box-shadow: 0 6px 24px -18px var(--shadow);
@@ -1059,8 +1059,8 @@ window.MathJax = {
   DRS.hero = function (canvas) {
     const ctx = canvas.getContext('2d');
     const noise = makeNoise();
-    let W, H, DPR, particles = [], t = 0, running = true, raf = 0;
-    const COUNT = () => Math.min(1100, Math.floor((W * H) / 1600));
+    let W, H, DPR, particles = [], t = 0, running = true, raf = 0, frame = 0;
+    const COUNT = () => Math.min(640, Math.floor((W * H) / 2400));
 
     function resize() {
       DPR = Math.min(window.devicePixelRatio || 1, 2);
@@ -1099,7 +1099,7 @@ window.MathJax = {
       }
       t += 0.0012;
     }
-    function loop() { if (running) step(); raf = requestAnimationFrame(loop); }
+    function loop() { raf = requestAnimationFrame(loop); if (!running) return; if (frame++ % 2) return; step(); }
 
     resize();
     window.addEventListener('resize', resize);
@@ -1138,8 +1138,8 @@ window.MathJax = {
     function reset() { u.fill(0); uPrev.fill(0); uNext.fill(0); phase = 0; }
 
     function physics() {
-      // drive a source at centre
-      phase += freq * 0.016;
+      // drive a source at centre (×2 to keep speed at 30fps step rate)
+      phase += freq * 0.03;
       const cx = NX >> 1, cy = NY >> 1;
       u[idx(cx, cy)] = Math.sin(phase) * amp;
 
@@ -1201,7 +1201,8 @@ window.MathJax = {
       ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke();
     }
 
-    function loop() { if (running) { physics(); draw(); } raf = requestAnimationFrame(loop); }
+    let frame = 0;
+    function loop() { raf = requestAnimationFrame(loop); if (!running) return; if (frame++ % 2) return; physics(); draw(); }
 
     resize();
     window.addEventListener('resize', resize);
@@ -1287,9 +1288,13 @@ window.MathJax = {
       ctx.putImageData(img, 0, 0);
     }
 
+    let frame = 0;
     function loop() {
-      if (running) { for (let s = 0; s < 3; s++) stepOnce(); render(); }
       raf = requestAnimationFrame(loop);
+      if (!running) return;
+      if (frame++ % 2) return;            // ~30fps
+      for (let s = 0; s < 3; s++) stepOnce();
+      render();
     }
 
     resize();
@@ -1317,7 +1322,7 @@ window.MathJax = {
 
   DRS.turbulence = function (canvas, stage) {
     const ctx = canvas.getContext('2d');
-    const N = 120, SZ = (N + 2) * (N + 2);
+    const N = 96, SZ = (N + 2) * (N + 2);
     const IX = (i, j) => i + (N + 2) * j;
 
     let u = new Float32Array(SZ), v = new Float32Array(SZ);
@@ -1381,7 +1386,7 @@ window.MathJax = {
           p[IX(i, j)] = 0;
         }
       set_bnd(0, div); set_bnd(0, p);
-      lin_solve(0, p, div, 1, 4, 14);
+      lin_solve(0, p, div, 1, 4, 10);
       for (let j = 1; j <= N; j++)
         for (let i = 1; i <= N; i++) {
           uu[IX(i, j)] -= 0.5 * (p[IX(i + 1, j)] - p[IX(i - 1, j)]) / h;
@@ -1475,14 +1480,15 @@ window.MathJax = {
       ctx.putImageData(img, 0, 0);
     }
 
+    let frame = 0;
     function loop() {
-      if (running) {
-        if (active) { idle++; if (idle > 40) active = false; }
-        else autoDrive();
-        inject();
-        velStep(); densStep(); render();
-      }
       raf = requestAnimationFrame(loop);
+      if (!running) return;
+      if (frame++ % 2) return;            // ~30fps: halves solver cost
+      if (active) { idle++; if (idle > 40) active = false; }
+      else autoDrive();
+      inject();
+      velStep(); densStep(); render();
     }
 
     resize();
@@ -1772,7 +1778,7 @@ window.MathJax = {
       W = canvas.clientWidth; H = canvas.clientHeight;
       canvas.width = W * DPR; canvas.height = H * DPR;
       ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-      const n = Math.min(90, Math.floor(W / 16));
+      const n = Math.min(56, Math.floor(W / 26));
       pts = Array.from({ length: n }, () => ({
         x: Math.random() * W, y: Math.random() * H,
         vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3,
@@ -1798,7 +1804,8 @@ window.MathJax = {
       ctx.fillStyle = 'rgba(13,148,136,.85)';
       for (const p of pts) { ctx.beginPath(); ctx.arc(p.x, p.y, 1.4, 0, 6.283); ctx.fill(); }
     }
-    function loop() { if (running) step(); raf = requestAnimationFrame(loop); }
+    let cframe = 0;
+    function loop() { raf = requestAnimationFrame(loop); if (!running) return; if (cframe++ % 2) return; step(); }
     resize(); window.addEventListener('resize', resize); loop();
     return { pause() { running = false; }, resume() { running = true; } };
   }

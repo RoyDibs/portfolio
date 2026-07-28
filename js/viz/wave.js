@@ -24,8 +24,8 @@
     function reset() { u.fill(0); uPrev.fill(0); uNext.fill(0); phase = 0; }
 
     function physics() {
-      // drive a source at centre
-      phase += freq * 0.016;
+      // drive a source at centre (×2 to keep speed at 30fps step rate)
+      phase += freq * 0.03;
       const cx = NX >> 1, cy = NY >> 1;
       u[idx(cx, cy)] = Math.sin(phase) * amp;
 
@@ -87,7 +87,8 @@
       ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke();
     }
 
-    function loop() { if (running) { physics(); draw(); } raf = requestAnimationFrame(loop); }
+    let frame = 0;
+    function loop() { raf = requestAnimationFrame(loop); if (!running) return; if (frame++ % 2) return; physics(); draw(); }
 
     resize();
     window.addEventListener('resize', resize);

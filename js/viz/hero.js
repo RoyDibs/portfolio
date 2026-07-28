@@ -30,8 +30,8 @@
   DRS.hero = function (canvas) {
     const ctx = canvas.getContext('2d');
     const noise = makeNoise();
-    let W, H, DPR, particles = [], t = 0, running = true, raf = 0;
-    const COUNT = () => Math.min(1100, Math.floor((W * H) / 1600));
+    let W, H, DPR, particles = [], t = 0, running = true, raf = 0, frame = 0;
+    const COUNT = () => Math.min(640, Math.floor((W * H) / 2400));
 
     function resize() {
       DPR = Math.min(window.devicePixelRatio || 1, 2);
@@ -70,7 +70,7 @@
       }
       t += 0.0012;
     }
-    function loop() { if (running) step(); raf = requestAnimationFrame(loop); }
+    function loop() { raf = requestAnimationFrame(loop); if (!running) return; if (frame++ % 2) return; step(); }
 
     resize();
     window.addEventListener('resize', resize);

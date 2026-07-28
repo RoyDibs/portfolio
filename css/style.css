@@ -91,8 +91,8 @@ canvas { display: block; }
   border-bottom: 1px solid transparent;
 }
 .nav.is-scrolled {
-  background: var(--glass);
-  backdrop-filter: blur(14px) saturate(160%);
+  background: rgba(247,248,251,.9);
+  backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--line);
   padding-top: 12px; padding-bottom: 12px;
   box-shadow: 0 6px 24px -18px var(--shadow);

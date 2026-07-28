@@ -101,7 +101,7 @@
       W = canvas.clientWidth; H = canvas.clientHeight;
       canvas.width = W * DPR; canvas.height = H * DPR;
       ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-      const n = Math.min(90, Math.floor(W / 16));
+      const n = Math.min(56, Math.floor(W / 26));
       pts = Array.from({ length: n }, () => ({
         x: Math.random() * W, y: Math.random() * H,
         vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3,
@@ -127,7 +127,8 @@
       ctx.fillStyle = 'rgba(13,148,136,.85)';
       for (const p of pts) { ctx.beginPath(); ctx.arc(p.x, p.y, 1.4, 0, 6.283); ctx.fill(); }
     }
-    function loop() { if (running) step(); raf = requestAnimationFrame(loop); }
+    let cframe = 0;
+    function loop() { raf = requestAnimationFrame(loop); if (!running) return; if (cframe++ % 2) return; step(); }
     resize(); window.addEventListener('resize', resize); loop();
     return { pause() { running = false; }, resume() { running = true; } };
   }

@@ -6,7 +6,7 @@
 
   DRS.turbulence = function (canvas, stage) {
     const ctx = canvas.getContext('2d');
-    const N = 120, SZ = (N + 2) * (N + 2);
+    const N = 96, SZ = (N + 2) * (N + 2);
     const IX = (i, j) => i + (N + 2) * j;
 
     let u = new Float32Array(SZ), v = new Float32Array(SZ);
@@ -70,7 +70,7 @@
           p[IX(i, j)] = 0;
         }
       set_bnd(0, div); set_bnd(0, p);
-      lin_solve(0, p, div, 1, 4, 14);
+      lin_solve(0, p, div, 1, 4, 10);
       for (let j = 1; j <= N; j++)
         for (let i = 1; i <= N; i++) {
           uu[IX(i, j)] -= 0.5 * (p[IX(i + 1, j)] - p[IX(i - 1, j)]) / h;
@@ -164,14 +164,15 @@
       ctx.putImageData(img, 0, 0);
     }
 
+    let frame = 0;
     function loop() {
-      if (running) {
-        if (active) { idle++; if (idle > 40) active = false; }
-        else autoDrive();
-        inject();
-        velStep(); densStep(); render();
-      }
       raf = requestAnimationFrame(loop);
+      if (!running) return;
+      if (frame++ % 2) return;            // ~30fps: halves solver cost
+      if (active) { idle++; if (idle > 40) active = false; }
+      else autoDrive();
+      inject();
+      velStep(); densStep(); render();
     }
 
     resize();
