@@ -1,11 +1,12 @@
 # Dibakar Roy Sarkar — Portfolio
 
-A story-driven personal site with **five live, interactive scientific simulations**
+An app-style personal site — five full-screen views (Overview · Research · Live Lab ·
+Publications · About) switched from the top nav, so there is little scrolling — with **five live, interactive scientific simulations**
 running entirely in the browser (no build step, no dependencies, plain HTML/CSS/JS):
 
 | Simulation | What it actually computes |
 |---|---|
-| **Hero flow-field** | Particles advected through a curl-noise field |
+| **Hero operator** | Drifting input field `a(x)` → solution of `(I − α∇²)u = a` (SOR, every frame); hover to perturb |
 | **Wave equation** | Finite-difference `∂²u/∂t² = c²∇²u` rendered as a live 3D wireframe |
 | **Allen–Cahn** | Phase separation `uₜ = ε²∇²u + u − u³` (spinodal decomposition + coarsening) |
 | **Turbulence** | Jos Stam's incompressible **stable-fluids** solver — interactive smoke |
@@ -43,7 +44,8 @@ python3 -m http.server 8000
   (see `assets/img/README.md`). Missing images show a tasteful placeholder automatically.
 - **Links** → update GitHub / LinkedIn / Scholar URLs in `index.html` (search for `href="https://github.com/"`).
 - **Colours** → tweak the CSS variables at the top of `css/style.css` (`--accent`, etc.).
-- **Content** → all copy lives in `index.html`, organised by section.
+- **Content** → all copy lives in `index.html`, one `<section class="view">` per tab.
+  Add a research project by adding a `.sw-item` button and a matching `.project` panel.
 
 ## Structure
 
@@ -52,8 +54,8 @@ Portfolio/
 ├─ index.html          # all content + section markup
 ├─ css/style.css       # theme + layout
 ├─ js/
-│  ├─ main.js          # nav, reveals, counters, viz lifecycle
-│  ├─ gallery.js       # photo grid (+ placeholders)
+│  ├─ main.js          # hash router for views, tab switchers, lazy media, viz lifecycle
+│  ├─ gallery.js       # photo strip (+ placeholders)
 │  └─ viz/             # the five simulations
 ├─ assets/img/         # your photos go here
 └─ assets/pdf/         # CV

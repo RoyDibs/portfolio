@@ -1,135 +1,100 @@
-/* main.js — page orchestration + lazy viz lifecycle */
+/* main.js — view routing, switchers, lazy media + viz lifecycle */
 (function () {
   const $ = s => document.querySelector(s);
   const $$ = s => Array.from(document.querySelectorAll(s));
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---- year ---- */
   const y = $('#year'); if (y) y.textContent = new Date().getFullYear();
 
-  /* ---- nav scroll state + burger ---- */
-  const nav = $('#nav'), links = $('.nav__links'), burger = $('#navBurger');
-  const onScroll = () => {
-    nav.classList.toggle('is-scrolled', window.scrollY > 40);
-    const sp = $('#scrollProgress');
-    const h = document.documentElement;
-    const p = h.scrollTop / (h.scrollHeight - h.clientHeight);
-    if (sp) sp.style.width = (p * 100) + '%';
-  };
-  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  /* ---- lazy media: load gifs/videos only when their panel is shown ---- */
+  function loadMedia(root) {
+    root.querySelectorAll('[data-src]').forEach(el => {
+      el.src = el.dataset.src; el.removeAttribute('data-src');
+      if (el.tagName === 'VIDEO') { el.load(); el.play().catch(() => {}); }
+    });
+  }
+  // sims size themselves from clientWidth; nudge them after a panel becomes visible
+  const relayout = () => window.dispatchEvent(new Event('resize'));
 
-  if (burger) burger.addEventListener('click', () => {
-    links.classList.toggle('is-open'); burger.classList.toggle('is-open');
+  /* ---- views (hash router) ---- */
+  const VIEWS = ['overview', 'research', 'lab', 'publications', 'about'];
+  // old single-page anchors still land somewhere sensible
+  const ALIAS = { top: 'overview', journey: 'about', awards: 'about', gallery: 'about', contact: 'about',
+                  motion: 'research', work: 'research', papers: 'publications' };
+
+  function show(name) {
+    if (!VIEWS.includes(name)) name = ALIAS[name] || 'overview';
+    $$('.view').forEach(v => { v.hidden = v.dataset.view !== name; });
+    $$('.nav__tabs a').forEach(a => a.classList.toggle('is-active', a.dataset.view === name));
+    const active = $('#view-' + name);
+    const panel = active.querySelector('.project.is-active');
+    if (panel) loadMedia(panel);
+    window.scrollTo(0, 0);
+    relayout();
+  }
+  window.addEventListener('hashchange', () => show(location.hash.slice(1)));
+
+  /* ---- switchers: research projects + lab sims ---- */
+  $$('[data-switcher]').forEach(group => {
+    const buttons = Array.from(group.querySelectorAll('[data-target]'));
+    buttons.forEach(btn => btn.addEventListener('click', () => {
+      buttons.forEach(b => {
+        b.classList.toggle('is-active', b === btn);
+        document.getElementById(b.dataset.target).classList.toggle('is-active', b === btn);
+      });
+      const panel = document.getElementById(btn.dataset.target);
+      loadMedia(panel);
+      relayout();
+    }));
   });
-  $$('.nav__links a').forEach(a => a.addEventListener('click', () => {
-    links.classList.remove('is-open'); burger.classList.remove('is-open');
+
+  /* ---- publication filter ---- */
+  const filter = $('#pubFilter');
+  if (filter) filter.addEventListener('click', e => {
+    const btn = e.target.closest('[data-filter]'); if (!btn) return;
+    filter.querySelectorAll('button').forEach(b => b.classList.toggle('is-active', b === btn));
+    const f = btn.dataset.filter;
+    $$('.pub').forEach(p => { p.hidden = f !== 'all' && p.dataset.kind !== f; });
+  });
+
+  /* ---- gallery strip ---- */
+  const strip = $('#galleryGrid');
+  if (window.DRS && DRS.gallery) DRS.gallery(strip);
+  $$('[data-scroll]').forEach(b => b.addEventListener('click', () => {
+    strip.scrollBy({ left: +b.dataset.scroll * strip.clientWidth * 0.8, behavior: 'smooth' });
   }));
 
-  /* ---- cursor glow ---- */
-  const glow = $('#cursorGlow');
-  if (glow && window.matchMedia('(hover: hover)').matches) {
-    let tx = 0, ty = 0, cx = 0, cy = 0;
-    window.addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; });
-    (function follow() { cx += (tx - cx) * 0.12; cy += (ty - cy) * 0.12;
-      glow.style.transform = `translate(${cx}px, ${cy}px)`; requestAnimationFrame(follow); })();
-  }
-
-  /* ---- reveal on scroll ---- */
-  const revObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-in'); revObs.unobserve(e.target); } });
-  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
-  $$('.reveal').forEach(el => reduce ? el.classList.add('is-in') : revObs.observe(el));
-
-  /* ---- animated stat counters ---- */
-  const statObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (!e.isIntersecting) return;
-      const el = e.target, target = parseFloat(el.dataset.count);
-      const suf = el.dataset.suffix || '', pre = el.dataset.prefix || '';
-      const dur = 1400, t0 = performance.now();
-      const tick = now => {
-        const k = Math.min(1, (now - t0) / dur);
-        const val = Math.floor((1 - Math.pow(1 - k, 3)) * target);
-        el.textContent = pre + val.toLocaleString() + suf;
-        if (k < 1) requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick); statObs.unobserve(el);
-    });
-  }, { threshold: 0.6 });
-  $$('.stat__num').forEach(el => statObs.observe(el));
-
-  /* ---- gallery ---- */
-  if (window.DRS && DRS.gallery) DRS.gallery($('#galleryGrid'));
-
-  /* ---- viz lifecycle: build lazily, pause when off-screen ---- */
+  /* ---- viz lifecycle: run only while visible on screen ---- */
   const registry = [
-    { id: 'heroCanvas',    make: () => DRS.hero($('#heroCanvas')) },
-    { id: 'waveCanvas',    make: () => DRS.wave($('#waveCanvas')) },
-    { id: 'acCanvas',      make: () => DRS.allenCahn($('#acCanvas')) },
-    { id: 'turbCanvas',    make: () => DRS.turbulence($('#turbCanvas'), $('#viz-turb .viz__stage')) },
-    { id: 'ctrlCanvas',    make: () => DRS.control($('#ctrlCanvas')) },
-    { id: 'contactCanvas', make: () => contactField($('#contactCanvas')) },
+    { id: 'heroCanvas', make: () => DRS.hero($('#heroCanvas')) },
+    { id: 'waveCanvas', make: () => DRS.wave($('#waveCanvas')) },
+    { id: 'acCanvas',   make: () => DRS.allenCahn($('#acCanvas')) },
+    { id: 'turbCanvas', make: () => DRS.turbulence($('#turbCanvas'), $('#viz-turb .viz__stage')) },
+    { id: 'ctrlCanvas', make: () => DRS.control($('#ctrlCanvas')) },
   ];
   const instances = {};
-  const vizObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      const id = e.target.id;
-      const inst = instances[id];
-      if (!inst) return;
-      if (e.isIntersecting) inst.resume(); else inst.pause();
-    });
-  }, { threshold: 0.05 });
-
   registry.forEach(r => {
     const el = document.getElementById(r.id);
     if (!el) return;
     try {
       instances[r.id] = r.make();
-      // hero + contact autoplay; others resume when scrolled into view
-      if (r.id === 'heroCanvas') instances[r.id].resume && instances[r.id].resume();
-      vizObs.observe(el);
+      instances[r.id].pause();
     } catch (err) { console.warn('viz init failed', r.id, err); }
   });
 
-  /* ---- contact constellation ---- */
-  function contactField(canvas) {
-    if (!canvas) return { pause() {}, resume() {} };
-    const ctx = canvas.getContext('2d');
-    let W, H, DPR, pts = [], running = false, raf = 0;
-    function resize() {
-      DPR = Math.min(window.devicePixelRatio || 1, 2);
-      W = canvas.clientWidth; H = canvas.clientHeight;
-      canvas.width = W * DPR; canvas.height = H * DPR;
-      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-      const n = Math.min(56, Math.floor(W / 26));
-      pts = Array.from({ length: n }, () => ({
-        x: Math.random() * W, y: Math.random() * H,
-        vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3,
-      }));
-    }
-    function step() {
-      ctx.clearRect(0, 0, W, H);
-      for (const p of pts) {
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < 0 || p.x > W) p.vx *= -1;
-        if (p.y < 0 || p.y > H) p.vy *= -1;
-      }
-      for (let i = 0; i < pts.length; i++) {
-        for (let j = i + 1; j < pts.length; j++) {
-          const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
-          const d2 = dx * dx + dy * dy;
-          if (d2 < 130 * 130) {
-            ctx.strokeStyle = `rgba(37,99,235,${0.16 * (1 - d2 / (130 * 130))})`;
-            ctx.beginPath(); ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(pts[j].x, pts[j].y); ctx.stroke();
-          }
-        }
-      }
-      ctx.fillStyle = 'rgba(13,148,136,.85)';
-      for (const p of pts) { ctx.beginPath(); ctx.arc(p.x, p.y, 1.4, 0, 6.283); ctx.fill(); }
-    }
-    let cframe = 0;
-    function loop() { raf = requestAnimationFrame(loop); if (!running) return; if (cframe++ % 2) return; step(); }
-    resize(); window.addEventListener('resize', resize); loop();
-    return { pause() { running = false; }, resume() { running = true; } };
-  }
+  // run a sim only while its canvas is displayed and overlaps the viewport
+  // (checked explicitly: IntersectionObserver misses display:none -> visible flips)
+  const syncViz = () => {
+    Object.keys(instances).forEach(id => {
+      const r = document.getElementById(id).getBoundingClientRect();
+      const visible = r.width > 0 && r.bottom > 0 && r.top < window.innerHeight;
+      if (visible) instances[id].resume(); else instances[id].pause();
+    });
+  };
+  let pending = false;
+  const queueSync = () => { if (pending) return; pending = true; requestAnimationFrame(() => { pending = false; syncViz(); }); };
+  window.addEventListener('scroll', queueSync, { passive: true });
+  window.addEventListener('resize', queueSync);
+
+  show(location.hash.slice(1));
 })();
